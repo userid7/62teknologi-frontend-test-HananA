@@ -22,23 +22,23 @@ export default function CustomTable({ columns, data }) {
     prepareRow, // Prepare the row (this function needs to be called for each row before getting the row props)
     headers, // headerGroups, if your table has groupings
     rows, // rows for the table based on the data passed
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    setPageSize,
-    state: { pageIndex, pageSize },
+    // page,
+    // canPreviousPage,
+    // canNextPage,
+    // pageOptions,
+    // pageCount,
+    // gotoPage,
+    // nextPage,
+    // previousPage,
+    // setPageSize,
+    // state: { pageIndex, pageSize },
   } = useTable(
     {
       columns,
       data,
-      initialState: { pageSize: 8 },
+      // initialState: { pageSize: 8 },
     },
-    usePagination,
+    // usePagination,
   );
 
   /* 
@@ -47,7 +47,7 @@ export default function CustomTable({ columns, data }) {
   */
   return (
     <div className="flex flex-col">
-      <div className="flex py-3">
+      {/* <div className="flex py-3">
         <InputGroup className="w-full">
           <Input className="w-full" />
           <Button>Search</Button>
@@ -55,38 +55,32 @@ export default function CustomTable({ columns, data }) {
       </div>
 
       <div>
-        <Collapse>
-          <Collapse.Title className="text-xl font-medium">
-            Filter
-          </Collapse.Title>
-          <Collapse.Content>
-            <div className="flex flex-row">
-              <Dropdown className="px-3">
-                <Dropdown.Toggle>Location</Dropdown.Toggle>
-                <Dropdown.Menu className="w-52">
-                  <Input className="w-full" />
-                </Dropdown.Menu>
-              </Dropdown>
-              <Dropdown className="px-3">
-                <Dropdown.Toggle>Price</Dropdown.Toggle>
-                <Dropdown.Menu className="w-52">
-                  <Dropdown.Item>$</Dropdown.Item>
-                  <Dropdown.Item>$$</Dropdown.Item>
-                  <Dropdown.Item>$$$</Dropdown.Item>
-                  <Dropdown.Item>$$$$</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <Dropdown className="px-3">
-                <Dropdown.Toggle>Status</Dropdown.Toggle>
-                <Dropdown.Menu className="w-52">
-                  <Dropdown.Item>Open</Dropdown.Item>
-                  <Dropdown.Item>Close</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          </Collapse.Content>
-        </Collapse>
-      </div>
+        <div className="flex flex-row">
+          <Dropdown className="px-3">
+            <Dropdown.Toggle>Location : NYC</Dropdown.Toggle>
+            <Dropdown.Menu className="w-52">
+              <Input className="w-full" />
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown className="px-3">
+            <Dropdown.Toggle>Price : 1</Dropdown.Toggle>
+            <Dropdown.Menu className="w-52">
+              <Dropdown.Item>all</Dropdown.Item>
+              <Dropdown.Item>low</Dropdown.Item>
+              <Dropdown.Item>low-mid</Dropdown.Item>
+              <Dropdown.Item>mid-high</Dropdown.Item>
+              <Dropdown.Item>high</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown className="px-3">
+            <Dropdown.Toggle>Status : -</Dropdown.Toggle>
+            <Dropdown.Menu className="w-52">
+              <Dropdown.Item>Open only</Dropdown.Item>
+              <Dropdown.Item>All</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+      </div> */}
 
       <div className="flex overflow-x-auto py-3">
         <Table {...getTableProps()} className="w-full">
@@ -98,7 +92,7 @@ export default function CustomTable({ columns, data }) {
             ))}
           </Table.Head>
           <Table.Body {...getTableBodyProps()}>
-            {page.map((row, i) => {
+            {rows.map((row, i) => {
               prepareRow(row);
               return (
                 <Table.Row {...row.getRowProps()}>
@@ -116,7 +110,7 @@ export default function CustomTable({ columns, data }) {
         </Table>
       </div>
 
-      <div className="m-auto flex pt-6">
+      {/* <div className="m-auto flex pt-6">
         <ButtonGroup>
           <Button
             size="sm"
@@ -151,7 +145,7 @@ export default function CustomTable({ columns, data }) {
             {">>"}
           </Button>{" "}
         </ButtonGroup>
-      </div>
+      </div> */}
     </div>
   );
 }
