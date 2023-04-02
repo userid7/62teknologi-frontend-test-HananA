@@ -1,16 +1,16 @@
 import styles from "@/styles/Home.module.css";
+
+import axios from "axios";
 import Link from "next/link";
 
-import CustomTable from "../components/table.js";
 import { useState, useMemo } from "react";
+import { useRouter } from "next/router.js";
 
-import { useQuery } from "react-query";
-import axios from "axios";
 import HeaderWithSearch from "@/components/header_search.js";
 import RatingStar from "@/components/rating_star.js";
 import CustomPagination from "@/components/pagination.js";
 import CustomFilter from "@/components/filter.js";
-import { useRouter } from "next/router.js";
+import CustomTable from "@/components/table.js";
 
 const PAGE_SIZE = 50;
 
@@ -24,8 +24,7 @@ const fetchBusiness = async ({
   term,
 }) => {
   const headers = {
-    Authorization:
-      "Bearer Ubf1-f0uqsJUnssqPMGo-tiFeZTT85oFmKfznlPmjDtX8s83jYMoAb-ApuD63wgq6LDZNsUXG6gurZIVYaj2jzxJmmLdCdXbDqIHU_b6KiCEVi8v-YB0OSsW6MWaY3Yx",
+    Authorization: `Bearer ${process.env.YELP_ACCESS_KEY}`,
     Accept: "application/json",
     // "Access-Control-Allow-Origin": "*",
     // "Content-Type": "application/json",
@@ -54,10 +53,10 @@ const fetchBusiness = async ({
   }
 };
 
-const navToToNewRoute = ({ location, price, is_closed, term, page }) => {};
-
 export default function ListBusiness({ filterParam, data, paginationData }) {
   var router = useRouter();
+
+  var [searchString, setSearchString] = useState("");
 
   const gotoPage = (page) => {
     const url = {
@@ -74,10 +73,20 @@ export default function ListBusiness({ filterParam, data, paginationData }) {
     router.replace(url);
   };
 
+  const handleSearchStringChange = (e) => {
+    e.preventDefault();
+    setSearchString(e.target.value);
+  };
+
   const columns = useMemo(
     () => [
       {
-        Header: () => <HeaderWithSearch name="Name" />,
+        Header: () => (
+          <HeaderWithSearch
+            name="Name"
+            handleSearchStringChange={handleSearchStringChange}
+          />
+        ),
         accessor: "name",
         Cell: ({ cell: { row, value } }) => (
           <Link href={`/detail_business/${row.original.id}`}>{value}</Link>
@@ -111,7 +120,12 @@ export default function ListBusiness({ filterParam, data, paginationData }) {
               term={filterParam.term}
               open_now={filterParam.open_now}
             />
-            <CustomTable columns={columns} data={data} />;
+            <CustomTable
+              columns={columns}
+              data={data}
+              searchString={searchString}
+            />
+            ;
             <CustomPagination
               page={paginationData.page}
               totalPage={paginationData.totalPage}

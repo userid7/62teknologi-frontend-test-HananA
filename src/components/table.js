@@ -14,7 +14,7 @@ import {
   Collapse,
 } from "react-daisyui";
 
-export default function CustomTable({ columns, data }) {
+export default function CustomTable({ columns, data, searchString }) {
   // Use the useTable Hook to send the columns and data to build the table
   const {
     getTableProps, // table props from react-table
@@ -22,24 +22,10 @@ export default function CustomTable({ columns, data }) {
     prepareRow, // Prepare the row (this function needs to be called for each row before getting the row props)
     headers, // headerGroups, if your table has groupings
     rows, // rows for the table based on the data passed
-    // page,
-    // canPreviousPage,
-    // canNextPage,
-    // pageOptions,
-    // pageCount,
-    // gotoPage,
-    // nextPage,
-    // previousPage,
-    // setPageSize,
-    // state: { pageIndex, pageSize },
-  } = useTable(
-    {
-      columns,
-      data,
-      // initialState: { pageSize: 8 },
-    },
-    // usePagination,
-  );
+  } = useTable({
+    columns,
+    data,
+  });
 
   /* 
     Render the UI for your table
@@ -47,41 +33,6 @@ export default function CustomTable({ columns, data }) {
   */
   return (
     <div className="flex flex-col">
-      {/* <div className="flex py-3">
-        <InputGroup className="w-full">
-          <Input className="w-full" />
-          <Button>Search</Button>
-        </InputGroup>
-      </div>
-
-      <div>
-        <div className="flex flex-row">
-          <Dropdown className="px-3">
-            <Dropdown.Toggle>Location : NYC</Dropdown.Toggle>
-            <Dropdown.Menu className="w-52">
-              <Input className="w-full" />
-            </Dropdown.Menu>
-          </Dropdown>
-          <Dropdown className="px-3">
-            <Dropdown.Toggle>Price : 1</Dropdown.Toggle>
-            <Dropdown.Menu className="w-52">
-              <Dropdown.Item>all</Dropdown.Item>
-              <Dropdown.Item>low</Dropdown.Item>
-              <Dropdown.Item>low-mid</Dropdown.Item>
-              <Dropdown.Item>mid-high</Dropdown.Item>
-              <Dropdown.Item>high</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-          <Dropdown className="px-3">
-            <Dropdown.Toggle>Status : -</Dropdown.Toggle>
-            <Dropdown.Menu className="w-52">
-              <Dropdown.Item>Open only</Dropdown.Item>
-              <Dropdown.Item>All</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
-      </div> */}
-
       <div className="flex overflow-x-auto py-3">
         <Table {...getTableProps()} className="w-full">
           <Table.Head>
@@ -109,43 +60,6 @@ export default function CustomTable({ columns, data }) {
           </Table.Body>
         </Table>
       </div>
-
-      {/* <div className="m-auto flex pt-6">
-        <ButtonGroup>
-          <Button
-            size="sm"
-            onClick={() => gotoPage(0)}
-            disabled={!canPreviousPage}
-          >
-            {"<<"}
-          </Button>{" "}
-          <Button
-            size="sm"
-            onClick={() => previousPage()}
-            disabled={!canPreviousPage}
-          >
-            {"<"}
-          </Button>{" "}
-          <Button size="sm" animation={false} active={false}>
-            <span>
-              Page{" "}
-              <strong>
-                {pageIndex + 1} of {pageOptions.length}
-              </strong>{" "}
-            </span>
-          </Button>{" "}
-          <Button size="sm" onClick={() => nextPage()} disabled={!canNextPage}>
-            {">"}
-          </Button>{" "}
-          <Button
-            size="sm"
-            onClick={() => gotoPage(pageCount - 1)}
-            disabled={!canNextPage}
-          >
-            {">>"}
-          </Button>{" "}
-        </ButtonGroup>
-      </div> */}
     </div>
   );
 }
