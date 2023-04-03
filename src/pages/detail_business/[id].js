@@ -1,11 +1,5 @@
-import styles from "@/styles/Home.module.css";
-import { useState, useMemo } from "react";
-
-import { useQuery } from "react-query";
 import axios from "axios";
-import { Button, Card, Carousel } from "react-daisyui";
-import RatingStar from "@/components/rating_star";
-import ReviewCard from "@/components/review_card";
+import { Carousel } from "react-daisyui";
 import RatingReviewSection from "@/components/rating_review";
 
 const fetchBusinessById = async (id) => {

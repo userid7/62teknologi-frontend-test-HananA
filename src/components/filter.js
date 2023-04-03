@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-import {
-  Table,
-  Pagination,
-  Button,
-  Input,
-  InputGroup,
-  ButtonGroup,
-  Card,
-  Toggle,
-  Dropdown,
-  Collapse,
-} from "react-daisyui";
+import { Button, Input, InputGroup, Dropdown } from "react-daisyui";
 
 export default function CustomFilter({ location, price, open_now, term }) {
   const router = useRouter();

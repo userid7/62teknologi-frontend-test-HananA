@@ -1,18 +1,7 @@
 import React from "react";
 import { useTable, usePagination } from "react-table";
 
-import {
-  Table,
-  Pagination,
-  Button,
-  Input,
-  InputGroup,
-  ButtonGroup,
-  Card,
-  Toggle,
-  Dropdown,
-  Collapse,
-} from "react-daisyui";
+import { Button, ButtonGroup } from "react-daisyui";
 
 export default function CustomPagination({ page, totalPage, gotoPage }) {
   //   var gotoPage = (page) => {};

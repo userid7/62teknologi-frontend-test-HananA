@@ -3,15 +3,6 @@ import { useTable, usePagination } from "react-table";
 
 import {
   Table,
-  Pagination,
-  Button,
-  Input,
-  InputGroup,
-  ButtonGroup,
-  Card,
-  Toggle,
-  Dropdown,
-  Collapse,
 } from "react-daisyui";
 
 export default function CustomTable({ columns, data, searchString }) {
