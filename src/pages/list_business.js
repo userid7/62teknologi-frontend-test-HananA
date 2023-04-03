@@ -3,7 +3,7 @@ import styles from "@/styles/Home.module.css";
 import axios from "axios";
 import Link from "next/link";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/router.js";
 
 import HeaderWithSearch from "@/components/header_search.js";
@@ -57,6 +57,11 @@ export default function ListBusiness({ filterParam, data, paginationData }) {
   var router = useRouter();
 
   var [searchString, setSearchString] = useState("");
+  var [searchedData, setSearchedData] = useState(data);
+
+  useEffect(() => {
+    setSearchedData(data);
+  }, [data]);
 
   const gotoPage = (page) => {
     const url = {
@@ -75,7 +80,20 @@ export default function ListBusiness({ filterParam, data, paginationData }) {
 
   const handleSearchStringChange = (e) => {
     e.preventDefault();
-    setSearchString(e.target.value);
+
+    var key = e.target.value;
+
+    if (key == "") {
+      setSearchedData(data);
+    } else {
+      setSearchedData(
+        data.filter((item) =>
+          item.name.toLowerCase().includes(key.toLowerCase()),
+        ),
+      );
+    }
+
+    setSearchString(key);
   };
 
   const columns = useMemo(
@@ -114,6 +132,7 @@ export default function ListBusiness({ filterParam, data, paginationData }) {
       <div>
         <main className="flex">
           <div className="pt-15 m-auto mt-12 w-5/6 max-w-[700px] py-5">
+            <div className="py-5 text-3xl">YELP-API data table</div>
             <CustomFilter
               location={filterParam.location}
               price={filterParam.price}
@@ -122,10 +141,9 @@ export default function ListBusiness({ filterParam, data, paginationData }) {
             />
             <CustomTable
               columns={columns}
-              data={data}
+              data={searchedData}
               searchString={searchString}
             />
-            ;
             <CustomPagination
               page={paginationData.page}
               totalPage={paginationData.totalPage}
@@ -183,11 +201,6 @@ export const getServerSideProps = async (context) => {
 
   if (remainder > 0) {
     totalPage = totalPage + 1;
-
-    // // remove loop data from last page
-    // if (page == totalPage) {
-    //   data = data.slice(0, res.total % PAGE_SIZE);
-    // }
   }
 
   var paginationData = { page, totalPage };

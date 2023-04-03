@@ -173,13 +173,13 @@ export default function CustomFilter({ location, price, open_now, term }) {
             >
               Open only
             </Dropdown.Item>
-            <Dropdown.Item
+            {/* <Dropdown.Item
               onClick={() => {
                 setOpenNow(false);
               }}
             >
               Close only
-            </Dropdown.Item>
+            </Dropdown.Item> */}
             <Dropdown.Item
               onClick={() => {
                 setOpenNow(null);

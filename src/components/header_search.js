@@ -8,7 +8,8 @@ export default function HeaderWithSearch({ name, handleSearchStringChange }) {
         <Input
           borderOffset={false}
           size="xs"
-          className="hidden focus:block group-hover:block"
+          bordered={false}
+          className="focus:block group-hover:block"
           onChange={handleSearchStringChange}
         />
       </div>

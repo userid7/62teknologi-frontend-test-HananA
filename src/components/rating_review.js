@@ -10,8 +10,8 @@ export default function RatingReviewSection({
   reviews,
 }) {
   return (
-    <div className="mx-4">
-      <div className="pt-16 text-4xl font-black">{name}</div>
+    <div className="mx-8 md:mx-4">
+      <div className="text-4xl font-black md:pt-16">{name}</div>
       <div className="text-md py-5">
         <RatingStar rating={rating} /> / {review_count} reviews
       </div>
